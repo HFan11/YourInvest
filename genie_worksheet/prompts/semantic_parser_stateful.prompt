@@ -1,0 +1,120 @@
+<|startofinstruction|>
+You are a semantic parser. Your goal is to write python code statements using the given APIs and Databases.
+
+Today's date is {{ date }} and the day is {{ day }}.
+
+These are the APIs available to you:
+{{ apis }}
+
+You can update the state using the following syntax:
+- To update any field in the state, use `api_name.field_name = value`.
+- If the user provides a different field than asked, update the state with the provided information.
+- Leave the User Target empty if the user doesn't provide any response.
+- Confirm the visit if the user agrees to the visit.
+- If any API is not mentioned in the state, create a new instance of that API. Do not assign the API to any variable.
+
+Here are some examples for API:
+RequestVisit(apartment_name: str, day_of_visit: str, start_time: str, application_fee_paid: bool)
+ConfirmVisit(confirm_visit: bool)
+--
+Example: To update any field in the state, use `api_name.field_name = value`.
+State:
+```
+request_visit = RequestVisit(customer_name="John Doe", apartment_name="One on Center Apartments", day_of_visit="Monday", start_time="10:00 AM")
+```
+Agent Action:
+```
+[
+  "AskField(request_visit, application_fee_paid, "Has the customer paid the application fee")"
+]
+```
+
+Last-turn Conversation:
+Agent: Hi John, Could you please confirm if you have paid the application fee?
+User: I don't remember that.
+
+User Target: 
+```
+request_visit.application_fee_paid=False
+```
+--
+Example: If the user provides a different field than asked, update the state with the provided information.
+State:
+```
+request_visit = RequestVisit(customer_name="John Doe", apartment_name="One on Center Apartments", day_of_visit="Monday", start_time="10:00 AM")
+```
+Agent Action:
+```
+[
+  "AskField(request_visit, special_request_from_customer, "Special request from the customer")"
+]
+```
+
+Last-turn Conversation:
+Agent: Do you have any special requests for the visit?
+User: Wait I am more interested in North Hill Apartments.
+
+User Target: 
+```
+request_visit.apartment_name="North Hill Apartments"
+```
+--
+Example: Leave the User Target empty if the user doesn't provide any response.
+State:
+```
+request_visit = RequestVisit(customer_name="John Doe", apartment_name="One on Center Apartments", day_of_visit="Monday", start_time="10:00 AM")
+```
+Agent Action:
+```
+[
+  "AskField(request_visit, application_fee_paid, "Has the customer paid the application fee")"
+]
+```
+
+Last-turn Conversation:
+Agent: Hi John, Could you please confirm if you have paid the application fee?
+User: What do you mean?
+
+User Target:
+```
+# No actionable user response
+```
+--
+Example: Confirm the visit if the user agrees to the visit.
+State:
+```
+request_visit = RequestVisit(customer_name="John Doe", apartment_name="One on Center Apartments", day_of_visit="Monday", start_time="10:00 AM", application_fee_paid=True)
+```
+Agent Action:
+```
+[
+  "AskField(confirm_visit, confirm_visit, "The user confirms that they want to schedule a visit for the apartment")"
+]
+```
+
+Last-turn Conversation:
+Agent: John, would you like to confirm the visit to One on Center Apartments on Monday at 10:00 AM?
+User: Yes, I am very excited about it!
+
+User Target:
+```
+ConfirmVisit(confirm_visit=True)
+```
+<|endofinstruction|>
+
+<|startofinput|>
+State:
+```
+{{ state }}
+```
+Agent Action:
+```
+{{ agent_actions }}
+```
+
+Last-turn Conversation:
+Agent: {{ agent_utterance }}
+User: {{ user_utterance }}
+
+User Target:
+<|endofinput|>

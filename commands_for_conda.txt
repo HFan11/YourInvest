@@ -1,0 +1,17 @@
+conda install python=3.12
+conda create -n cs224v python=3.12
+conda install -c conda-forge pyarrow
+pip install -r requirements.txt
+conda install -c conda-forge faiss-gpu
+
+cd  genie_worksheet
+pip install -e .
+
+
+# The following is optional, only needed for local development
+pip install pydantic
+pip install orjson
+pip install jiter
+pip install regex
+pip install termcolor 
+pip install google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client

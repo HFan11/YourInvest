@@ -1,0 +1,11 @@
+Metadata-Version: 2.1
+Name: worksheets
+Version: 0.1.0
+Summary: KITA is a programmable framework for creating task-oriented conversational agents that are designed to handle complex user interactions.
+Author: Harshit Joshi
+Author-email: harshitj@stanford.edu
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11

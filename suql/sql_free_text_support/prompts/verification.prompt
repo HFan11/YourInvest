@@ -1,0 +1,17 @@
+Here is a question:
+
+"{{ query }}"
+
+Here is a document:
+
+["{{ document }}"]
+
+Here is my answer:
+
+{{ answer }}
+
+Is my answer correct?
+
+Choose from one of the following choices:
+- the answer is correct.
+- the answer is incorrect.
